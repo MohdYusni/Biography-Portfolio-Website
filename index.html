@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mohd Yusni Bin Mohd Musa — Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0c0f13;
+  --card: #12161d;
+  --text: #e7eef7;
+  --muted: #93a4b7;
+  --accent: #63b3ff;
+  --accent2: #ff7ac0;
+  --glow: 0 0 12px rgba(99,179,255,.35);
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--text);
+  font-family: Inter, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* Header */
+.profile-header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  background: radial-gradient(circle at center, rgba(99,179,255,.15), transparent 60%);
+}
+.profile-header .name {
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.8vw, 3rem);
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+}
+.profile-header .subtitle {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.profile-photo {
+  display: block;
+  margin: 0 auto;
+  width: 180px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 58px rgba(99,179,255,.45);
+  border: 0px solid var(--accent);
+}
+
+/* Navigation */
+.nav {
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:saturate(140%) blur(8px);
+  background: rgba(12,15,19,.55);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-inner {
+  max-width:1100px; margin:0 auto;
+  display:flex; align-items:center; justify-content:center;
+  gap:1.25rem; padding:.7rem 1rem;
+}
+.nav a {
+  position:relative;
+  padding:.5rem .75rem; border-radius:8px;
+  transition: color .25s ease, transform .25s ease;
+  color:var(--muted); font-weight:600;
+}
+.nav a::after {
+  content:""; position:absolute; left:.6rem; right:.6rem; bottom:0.25rem; height:2px;
+  background:linear-gradient(90deg,transparent, var(--accent), transparent);
+  transform:scaleX(0); transform-origin:center;
+  transition:transform .25s ease;
+  border-radius:2px; box-shadow:var(--glow);
+  opacity:.85;
+}
+.nav a:hover {
+  color:var(--text); text-shadow:0 0 6px rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+.nav a:hover::after { transform:scaleX(1); }
+
+/* Chip */
+.chip {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:linear-gradient(180deg, #141922, #10141b);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--text); padding:.5rem .75rem; border-radius:999px;
+  box-shadow:0 6px 20px rgba(0,0,0,.35), var(--glow);
+  font-weight:700; letter-spacing:.3px;
+}
+.dot {
+  width:10px; height:10px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #63b3ff);
+  box-shadow:0 0 10px rgba(99,179,255,.55);
+}
+
+/* Two-column layout */
+.container { max-width:1100px; margin:0 auto; padding:2rem 1rem; }
+.grid { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+@media (min-width:900px) {
+  .grid { grid-template-columns:1.05fr .95fr; }
+}
+.card {
+  background:linear-gradient(180deg, #12161d, #0f1319);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px; padding:1.25rem 1.25rem 1.5rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.card h2 { margin:.25rem 0 .75rem; font-size:1.35rem; }
+.lead { font-size:1rem; color:var(--muted); line-height:1.6; }
+
+/* Video styling */
+.intro-video, .guitar-video {
+  width: 100%;
+  max-width: 488px;
+  height: auto; /* FIXED: missing semicolon caused broken CSS */
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(99,179,255,.45);
+  display: block;
+  margin: 1rem auto;
+  background: #0f1319;
+  border: 1px solid rgba(255,255,255,.08); /*slightly thicker border */
+}
+#guitar-video,
+#video-ai {
+  width: 400px;          /* smaller width */
+  height: 500px;         /* shorter height */
+  object-fit: cover;     /* crops neatly without distortion */
+  border-radius: 12px;   /* rounded corners */
+  box-shadow: 0 0 12px rgba(99,179,255,.45);
+  border: 2px solid rgba(255,255,255,.12); /* smaller border */
+  display: block;
+  margin: 1rem auto;
+}
+
+
+/* Footer */
+footer {
+  margin-top:2rem; padding:1.25rem 1rem; text-align:center;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.06);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+}
+.foot-note { font-size:.95rem; }
+.browsers { margin-top:.5rem; font-size:.9rem; color:#a6b6c9; }
+.card {
+  background: linear-gradient(180deg, #12161d, #0f1319);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  min-height: 500px; /* ✅ This is the new line to control height */
+}
+.visitor-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.visitor-wrapper img {
+  filter: drop-shadow(0 0 8px rgba(99,179,255,.45));
+  border-radius: 6px;
+  max-width: 100%;
+}
+.intro-video {
+  width: 100%;
+  height: 300px; /* Or whatever height you prefer */
+}
+/* Photo scroll container */
+.photo-scroll {
+  overflow: hidden;              /* hides overflow */
+  border: 3px solid #63b3ff;     /* accent-colored border */
+  border-radius: 12px;           /* rounded corners */
+  box-shadow: 0 0 12px rgba(99,179,255,.45); /* glowing effect */
+  width: 100%;
+  max-width: 400px;              /* control frame width */
+  margin: 1rem auto;             /* center it */
+}
+
+/* Track that moves */
+.scroll-track {
+  display: flex;
+  width: calc(200%);             /* double width for looping */
+  animation: scroll-left 20s linear infinite;
+}
+
+/* Images inside */
+.scroll-track img {
+  width: 200px;                  /* fixed image width */
+  height: auto;
+  margin-right: 1rem;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+
+/* Keyframes for scrolling */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+</style>
+</head>
+
+<body>
+<header class="profile-header">
+  <h1 class="name">Mohd Yusni Bin Mohd Musa</h1>
+  <p class="subtitle">Auditor at Central Bank of Malaysia, Ex-Banker, Student, Guitarist. <br>
+    Malay Traditional Band Member of <strong>ARMADA DENDANG MALAYSIA</strong></p>
+  <img src="MYMM.jpg" alt="Profile photo of Mohd Yusni Bin Mohd Musa" class="profile-photo" />
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html">Home</a>
+    <a href="about me.html" class="active">About Me</a>
+    <a href="working.html" class="active">Working Experience</a>
+    <a href="awards&resume.html" class="active">Awards &amp; Resume</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  
+</nav>
+
+<section class="featured-logo" id="home">
+  <span class="chip"><span class="dot"></span> Featured</span>
+</section>
+
+<main class="container">
+  <div class="grid">
+
+    <!-- Left column -->
+    <article class="card">
+      <h2>Welcome</h2>
+      <p class="lead">
+        👋 Hi there! I'm <span class="highlight">Mohd Yusni Bin Mohd Musa</span>. By day, I work as an
+        <span class="highlight">auditor</span> at Central Bank of Malaysia, ensuring precision and integrity in financial systems.
+        By night, I dive into my true passion MUSIC. Think of this space as a blend of two worlds:
+        <br> - <strong>Audit & Accuracy</strong> 🧾 — my professional life at the Central Bank of Malaysia.
+        <br> - <strong>Passion & Melody</strong> 🎸 — my love for music that keeps me inspired.
+      </p>
+
+      <!-- Auto-Scrolling Photo Section -->
+        <h2 style="margin-top:1.4rem;">Photo Highlights</h2>
+        <div class="photo-scroll">
+          <div class="scroll-track">
+            <img src="gabenor.jpeg" alt="Photo 2">
+            <img src="me.jpeg" alt="Photo 3">
+            <img src="gold.jpeg" alt="Photo 5">
+
+            <!-- Duplicate for smooth infinite loop -->
+            <img src="gabenor.jpeg" alt="Photo 2">
+            <img src="me.jpeg" alt="Photo 3">
+            <img src="gold.jpeg" alt="Photo 5">
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- Right column -->
+    <aside class="card">
+      <h2>Guitar Performance</h2>
+      <p class="lead">Enjoy my live guitar session 🎸</p>
+
+      <!-- Background audio -->
+      <audio id="bg-audio" autoplay loop>
+        <source src="Afdholur Rasul.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+
+      <!-- AI video -->
+      <video id="video-ai" class="guitar-video" autoplay loop controls muted>
+        <source src="AI.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  <footer>
+  <div class="foot-note">© <span id="year"></span> Mohd Yusni Bin Mohd Musa. All Rights Reserved.</div>
+  <p>Last Update: Dec 21, 2025</p>
+  <div class="browsers">Recommended: Chrome, Firefox, Safari</div>
+  <div class="visitor-wrapper">
+    <a href="https://www.hitwebcounter.com" target="_blank">
+      <img src="https://hitwebcounter.com/counter/counter.php?page=123456&style=0006&nbdigits=1&type=page&initCount=0" 
+           title="Visitor Counter" alt="web counter" />
+    </a>
+  </div>
+</footer>
+
+<script>
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Grab elements (IDs must match HTML)
+const bgAudio   = document.getElementById('bg-audio');
+const videoGema = document.getElementById('video-gema');
+const videoAI   = document.getElementById('video-ai');
+
+// Core coordination: only one audio at a time
+function updateAudioState() {
+  const gemaActive = videoGema && !videoGema.muted && !videoGema.paused && !videoGema.ended;
+  const aiActive   = videoAI   && !videoAI.muted   && !videoAI.paused   && !videoAI.ended;
+
+  if (gemaActive) {
+    // Gema unmuted and playing → pause background, mute AI
+    if (!bgAudio.paused) bgAudio.pause();
+    if (videoAI && !videoAI.muted) videoAI.muted = true;
+    return;
+  }
+
+  if (aiActive) {
+    // AI unmuted and playing → pause background, mute Gema
+    if (!bgAudio.paused) bgAudio.pause();
+    if (videoGema && !videoGema.muted) videoGema.muted = true;
+    return;
+  }
+
+  // Neither video active → resume background audio
+  bgAudio.play().catch(()=>{ /* autoplay may be blocked until user interacts */ });
+}
+
+// Listen for changes on both videos
+['play','pause','volumechange','ended'].forEach(evt => {
+  if (videoGema) videoGema.addEventListener(evt, updateAudioState);
+  if (videoAI)   videoAI.addEventListener(evt, updateAudioState);
+});
+
+// Try to start background audio on load (may require user gesture)
+document.addEventListener('DOMContentLoaded', () => {
+  updateAudioState();
+});
+</script>
+</body>
+</html>

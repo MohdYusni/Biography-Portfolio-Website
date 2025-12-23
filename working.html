@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Working Experience | Mohd Yusni Bin Mohd Musa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Layout */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 1rem;
+      background: linear-gradient(to right, #1e293b, #334155);
+      flex-wrap: wrap;
+    }
+
+    .profile-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .profile-text h1 {
+      font-size: 2rem;
+      color: #facc15;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-text p {
+      margin: 0.3rem 0;
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .profile-text .update {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #facc15;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+    }
+
+    /* Music Toggle Button */
+    #music-toggle {
+      background:#334155;
+      color:#facc15;
+      border:none;
+      padding:8px 14px;
+      border-radius:6px;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    /* Navigation Bar */
+    .nav {
+      background-color: #1e293b;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .nav a {
+      color: #f1f5f9;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .nav a:hover {
+      color: #38bdf8;
+    }
+
+    .nav a.active {
+      color: #facc15;
+    }
+
+    .nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 3px;
+      background: #facc15;
+      animation: slide-in 0.4s ease;
+    }
+
+    @keyframes slide-in {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* Section Wrapper */
+    .section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 1rem;
+    }
+
+    /* Timeline Layout */
+    .timeline-entry {
+      margin-bottom: 1.5rem;
+      position: relative;
+      border-left: 4px solid #334155;
+      padding-left: 1rem;
+      transition: 0.3s ease;
+    }
+
+    .timeline-entry::before {
+      content: "●";
+      position: absolute;
+      left: -1.2rem;
+      color: #facc15;
+      font-size: 1rem;
+    }
+
+    .timeline-entry:hover {
+      background-color: #1e293b;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Collapsible Audit Assignment */
+    details {
+      background: #1e293b;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #334155;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    details[open] {
+      background-color: #273449;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #facc15;
+      list-style: none;
+    }
+
+    summary::marker {
+      display: none;
+    }
+
+    details[open] summary {
+      color: #38bdf8;
+    }
+
+    details p {
+      margin: 0.5rem 0 1rem;
+      color: #94a3b8;
+    }
+
+    /* External Links */
+    .external-links {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .external-links a svg {
+      width: 32px;
+      height: 32px;
+      fill: #38bdf8;
+      transition: transform 0.3s ease;
+    }
+
+    .external-links a:hover svg {
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1e293b;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    /* Scroll to Top Button */
+    #topBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background:#38bdf8;
+      color:#0f172a;
+      border:none;
+      padding:10px 14px;
+      border-radius:50%;
+      cursor:pointer;
+      display:none;
+      font-size:18px;
+    }
+
+    /* Invisible Audio */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header with Photo -->
+  <div class="profile-header">
+    <div class="profile-text">
+      <h1>Mohd Yusni Bin Mohd Musa</h1>
+      <p>Auditor at Central Bank of Malaysia, Ex-Banker, Student, Guitarist</p>
+      <p>Malay Traditional Band Member of ARMADA DENDANG MALAYSIA</p>
+      <div class="update"></div>
+
+      <button id="music-toggle">🔊 Music: On</button>
+    </div>
+
+    <img src="MYMM.jpg" alt="Mohd Yusni Bin Mohd Musa" class="profile-photo">
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="about me.html" class="active">About Me</a>
+    <a href="working.html" class="active">Working Experience</a>
+    <a href="awards&resume.html" class="active">Awards & Resume</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="Afdholur Rasul.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Career Journey -->
+  <section class="section">
+    <h2>Career Journey</h2>
+
+    <div class="timeline-entry fade-in">
+      <h3>July 2020 to 2025</h3>
+      <p>Bank Negara Malaysia - Associate Analyst - Internal Audit Department.</p>
+      <p>Primarily involves auditing and assessing the effectiveness of the Bank's risk management, internal controls, and governance processes.</p>
+    </div>
+
+    <div class="timeline-entry fade-in">
+      <h3>August 2011 to June 2020</h3>
+      <p>Bank Negara Malaysia - Audit Control Officer - Internal Audit Department</p>
+      <p>Conducting comprehensive audits to ensure internal controls and security measures are adequate and compliant.</p>
+    </div>
+
+    <div class="timeline-entry fade-in">
+      <h3>April 2008 to July 2020</h3>
+      <p>AmBank (M) Berhad - Executive - Property Supervision</p>
+      <p>Managing distressed and foreclosed properties, auctions, legal liaison, and contractor supervision.</p>
+    </div>
+
+    <div class="timeline-entry fade-in">
+      <h3>January 2006 to March 2008</h3>
+      <p>AmBank (M) Berhad - Senior Clerk - Property Supervision Unit</p>
+      <p>General office administration, monthly reports, court deposits, filing, mailing, and cheque processing.</p>
+    </div>
+
+    <div class="timeline-entry fade-in">
+      <h3>February 1999 to December 2005</h3>
+      <p>AmBank (M) Berhad - Clerk - Loan Rehabilitation Unit</p>
+      <p>Documentation management, CTOS checks, reports, spreadsheets, and assisting OIC with credit papers.</p>
+    </div>
+  </section>
+
+  <!-- Audit Assignment -->
+  <section class="section">
+    <h2>Audit Assignment</h2>
+
+    <details class="fade-in"><summary>2025</summary>
+      <p>Q1 : Jabatan Pengurusan Data dan Statistik - System User Access & Incidents Management</p>
+      <p>Q2 : Jabatan Pengurusan Risiko - Secretariat Function</p>
+      <p>Q3 : Jabatan Modal Insan - Procurement & Agreement Management and Information Security</p>
+      <p>Q4 : Malaysia Mint (MyMint) - Security Management & OSHA</p>
+    </details>
+
+    <details class="fade-in"><summary>2024</summary>
+      <p>Q1 : Software Development & Change Managemenst - Financial Intelligence System (FINS)</p>
+      <p>Q2 : Jabatan Infrastruktur Teknologi Digital & Jabatan Keselamatan Siber - Risk Management in Technology (RMiT)</p>
+      <p>Q3 : Jabatan Pakar Risiko dan Penyeliaan Teknologi - Horizontal Surveillance & Ploicy Development</p>
+      <p>Q4 : Jabatan Hospitaliti dan Muzium - Management of Outsourced Service Providers (OSPs)</p>
+    </details>
+
+    <details class="fade-in"><summary>2023</summary>
+      <p>Q1 : Jabatan Infrastruktur Teknologi Digital - RENTAS EPKI Infrastructure</p>
+      <p>Q2 : Jabatan Pengurusan Fasiliti - Property and Asset Management</p>
+      <p>Q3 : Jabatan Pengurusan Data dan Statistik - Management of Third Party Risk</p>
+      <p>Q4 : Jabatan Undang-Undang - Criminal & Civil Enforcement and Information Security Management</p>
+    </details>
+
+    <details class="fade-in"><summary>2022</summary>
+      <p>Q1 : Unit Pentadbiran Sektor Kewangan - Payment Processing & Procurement</p>
+      <p>Q2 : On Medical Leave</p>
+      <p>Q3 : On Medical Leave</p>
+      <p>Q4 : The SEACEN Centre - Human Resources Management</p>
+    </details>
+
+    <details class="fade-in"><summary>2021</summary>
+      <p>Q1 : Jabatan Pengurusan Fasiliti - Procurement & Vendor Management</p>
+      <p>Q2 : Jabatan Hospitaliti & Muzium - Transport Management & Mailing Services</p>
+      <p>Q3 : Jabatan Modal Insan Strategik - Procurement & Vendor Management and People Change Management</p>
+      <p>Q4 : Jabatan Pengurusan & Operasi Matawang - Banking Operations and User Access Control</p>
+    </details>
+
+    <details class="fade-in"><summary>July 2020 to December 2020</summary>
+      <p>Q4 : SEACEN - Procurement & Agreement Management</p>
+    </details>
+  </section>
+
+  <!-- External Links -->
+  <div class="external-links fade-in">
+    <a href="https://www.linkedin.com/in/mohdyusni" target="_blank" aria-label="LinkedIn Profile">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.6v2.2h.05c.5-1 1.7-2.2 3.5-2.2 3.75 0 4.45 2.5 4.45 5.8V24h-4v-8.2c0-2-.05-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.5V24h-4V8z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+   <div class="foot-note">© <span id="year"></span> Mohd Yusni Bin Mohd Musa. All Rights Reserved.</div>
+  <p>Last Update: 22 Dec 2025</p>
+  <div class="browsers">Recommended: Chrome, Firefox, Safari</div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="topBtn">↑</button>
+
+  <!-- JavaScript -->
+  <script>
+    /* Fade-in Scroll Animation */
+    const elements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    });
+    elements.forEach(el => observer.observe(el));
+
+    /* Music Toggle */
+    const audio = document.querySelector('audio');
+    const btn = document.getElementById('music-toggle');
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = "🔊 Music: On";
+      } else {
+        audio.pause();
+        btn.textContent = "🔇 Music: Off";
+      }
+    });
+
+    /* Scroll to Top Button */
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', () => {
+      topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

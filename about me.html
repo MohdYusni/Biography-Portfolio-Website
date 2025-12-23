@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mohd Yusni Bin Mohd Musa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #0c0f13;
+      --bg-alt: #11151b;
+      --card: #151922;
+      --accent: #63b3ff;
+      --accent-soft: rgba(99,179,255,.18);
+      --accent-strong: #ff7ac4;
+      --text: #f9fbff;
+      --muted: #a4b0c3;
+      --border-subtle: rgba(255,255,255,.04);
+      --danger: #ff4b6e;
+      --success: #4ade80;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,.65);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 180ms ease-out;
+      --transition-med: 240ms ease-out;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+
+      /* Control header height offset for layout */
+      --header-offset: 200px; /* adjust if you change banner padding */
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #1a2235 0, #05060a 55%, #020308 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-top: var(--header-offset); /* ensures content starts below fixed header */
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page-shell {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem; /* no top margin to avoid gap */
+      padding: 0 1.25rem;
+    }
+
+    /* Header / Banner fixed to top */
+    .banner {
+      position: fixed; /* pinned to very top */
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0; /* no curve at top edge */
+      padding: 2.5rem 1.75rem 1.75rem;
+      background:
+        radial-gradient(900px 500px at 0% 0%, rgba(99,179,255,.20), transparent 60%),
+        radial-gradient(800px 550px at 100% 10%, rgba(255,122,192,.18), transparent 60%),
+        linear-gradient(135deg, #0f172a 0%, #020617 55%, #020410 100%);
+      box-shadow: var(--shadow-soft);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      z-index: 1000;
+    }
+
+    /* Keep inner banner content within page width */
+    .banner > .banner-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      width: 100%;
+    }
+
+    .banner-inner { position: relative; flex: 1; z-index: 1; }
+    .name { font-size: clamp(1.9rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: .03em; margin-bottom: .35rem; }
+    .subtitle { font-size: .98rem; color: var(--muted); }
+    .subtitle-band { margin-top: .25rem; font-size: .95rem; color: #e5e7eb; }
+    .subtitle-band strong { color: var(--accent-strong); font-weight: 700; }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 22px rgba(99,179,255,.55);
+    }
+
+    .banner-aside {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      min-width: 160px;
+    }
+
+    .meta-date { font-size: .8rem; color: var(--muted); }
+
+    /* Navigation */
+    .nav {
+      margin-top: 4rem;
+      background: rgba(15,23,42,.92);
+      border-radius: var(--radius-pill);
+      padding: .4rem;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: center;
+      gap: .35rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.55);
+      position: sticky;
+      top: calc(var(--header-offset) + 0.75rem);
+      z-index: 900;
+      backdrop-filter: blur(18px);
+    }
+
+    .nav a {
+      font-size: .85rem;
+      padding: .35rem 1.1rem;
+      border-radius: var(--radius-pill);
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+    }
+
+    .nav a span.dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(99,179,255,.7);
+    }
+
+    .nav a:hover {
+      background: rgba(15,23,42,1);
+      color: #e5e7eb;
+      border-color: rgba(148,163,184,.5);
+      transform: translateY(-1px);
+    }
+
+    .nav a.active {
+      background: radial-gradient(circle at top left, rgba(99,179,255,.5), rgba(37,99,235,.18));
+      color: #f9fafb;
+      border-color: rgba(148,163,184,.7);
+      box-shadow: 0 12px 22px rgba(15,23,42,.75);
+    }
+
+    /* Layout: main content */
+    main {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 840px) {
+      .banner > .banner-shell { flex-direction: column; text-align: center; }
+      .banner-aside { flex-direction: column-reverse; }
+      .nav { flex-wrap: wrap; }
+      main { grid-template-columns: minmax(0, 1fr); }
+      :root { --header-offset: 230px; } /* slight bump on mobile if needed */
+    }
+
+    /* Cards / Sections */
+    .card {
+      background: linear-gradient(145deg, rgba(15,23,42,.96), rgba(15,23,42,.98));
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.35rem 1.6rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute; inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(99,179,255,.27), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(255,122,192,.25), transparent 60%);
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-med);
+    }
+    .card:hover::before { opacity: .9; }
+
+    .card h2 {
+      font-size: 1.1rem; margin-bottom: .6rem;
+      letter-spacing: .08em; text-transform: uppercase; color: #e5e7eb;
+    }
+    .card p { font-size: .95rem; color: var(--muted); }
+
+    .badge-label {
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .16em;
+      color: var(--muted); margin-bottom: .35rem;
+    }
+
+    .highlight { color: var(--accent-strong); font-weight: 600; }
+
+    /* Biography section */
+    .bio-text { font-size: .95rem; color: var(--muted); margin-top: .4rem; }
+
+    /* Personal interests */
+    .interests-list { margin-top: .4rem; list-style: none; }
+    .interests-list li {
+      font-size: .94rem; color: var(--muted);
+      padding-left: 1.1rem; position: relative; margin-bottom: .3rem;
+    }
+    .interests-list li::before {
+      content: "•"; position: absolute; left: 0; color: var(--accent);
+    }
+
+    /* Feedback form */
+    .form-group { margin-bottom: .9rem; }
+    .form-label { display: block; font-size: .9rem; color: #e5e7eb; margin-bottom: .25rem; }
+    .form-label span.helper { font-size: .8rem; color: var(--muted); font-weight: 400; margin-left: .25rem; }
+
+    .input, .textarea, .select {
+      width: 100%; padding: .55rem .65rem; border-radius: 10px;
+      border: 1px solid rgba(148,163,184,.45);
+      background: rgba(15,23,42,.95); color: var(--text); font-size: .9rem;
+      outline: none;
+      transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(99,179,255,.55);
+      transform: translateY(-1px);
+      background: rgba(15,23,42,1);
+    }
+
+    .textarea { min-height: 90px; resize: vertical; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .55rem 1.4rem; font-size: .9rem; border-radius: var(--radius-pill);
+      border: 1px solid rgba(37,99,235,.8);
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #f9fafb; cursor: pointer; gap: .35rem;
+      box-shadow: 0 14px 30px rgba(37,99,235,.45);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(37,99,235,.6);
+      background: linear-gradient(135deg, #1d4ed8, #4338ca);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 25px rgba(15,23,42,.9);
+    }
+    .btn-primary span.icon { font-size: 1rem; }
+
+    .resource-links a {
+  color: #63b3ff; /* or try #90cdf4 for brighter blue */
+  font-weight: 600;
+  font-size: .95rem;
+  padding: .3rem .4rem;
+  display: inline-block;
+  border-radius: 8px;
+  background: rgba(99,179,255,.08);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.resource-links a:hover {
+  background: rgba(99,179,255,.2);
+  color: #ffffff;
+  text-decoration: underline;
+}
+.resource-links {
+  margin-top: 1rem;
+  padding: .5rem 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.nav a {
+  font-size: 1rem;
+  padding: .5rem 1.2rem;
+  border-radius: var(--radius-pill);
+  color: #f9fafb; /* brighter text */
+  background: rgba(99,179,255,.08); /* soft accent background */
+  border: 1px solid rgba(99,179,255,.3);
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav a:hover {
+  background: rgba(99,179,255,.25);
+  color: #ffffff;
+  text-decoration: none;
+}
+.nav a.active {
+  background: linear-gradient(to right, #63b3ff, #ff7ac4);
+  color: #ffffff;
+  border-color: rgba(255,255,255,.3);
+  box-shadow: 0 0 12px rgba(99,179,255,.5);
+}
+
+
+    /* Footer */
+    footer {
+      margin-top: 2.3rem;
+      font-size: .8rem; color: var(--muted);
+      padding-top: 1rem; border-top: 1px solid rgba(148,163,184,.25);
+    }
+    footer strong { color: #e5e7eb; }
+
+    /* Photo scroll (cleaned duplicates) */
+    .photo-scroll {
+      margin-top: 1rem;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+
+    .scroll-track {
+      display: flex;
+      width: calc(250px * 10); /* 10 images at 250px each */
+      animation: scroll 40s linear infinite; /* slower timing */
+    }
+
+    .scroll-track img {
+      width: 250px; height: 160px; object-fit: cover;
+      border-right: 2px solid rgba(255,255,255,.05);
+      transition: transform 0.6s ease;
+    }
+
+    .scroll-track img:hover { transform: scale(1.15); z-index: 10; }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background music (single instance, auto-pauses on video play) -->
+  <audio id="bg-music" autoplay loop hidden>
+    <source src="Hamba Bersimpuh.mp3" type="audio/mpeg">
+  </audio>
+
+  <header class="banner" id="banner">
+    <div class="banner-shell">
+      <div class="banner-inner">
+        <h1 class="name">Mohd Yusni Bin Mohd Musa</h1>
+        <p class="subtitle">Auditor at Central Bank of Malaysia, ExBanker, Student, Guitarist</p>
+        <p class="subtitle subtitle-band">
+          Malay Traditional Band Member of <strong>ARMADA DENDANG MALAYSIA</strong>
+        </p>
+      </div>
+      <div class="banner-aside">
+        <img src="MYMM.jpg" alt="Profile photo of Mohd Yusni Bin Mohd Musa" class="profile-photo" />
+        <div class="meta-date">Last update: 22 Dec 2025</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="about me.html" class="active"><span class="dot"></span> About Me</a>
+      <a href="working.html" class="active">Working Experience</a>
+      <a href="awards&resume.html" class="active">Awards &amp; Resume</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <main>
+      <!-- LEFT COLUMN: Biography + Personal interests -->
+      <section class="card" aria-labelledby="bio-heading">
+        <div class="badge-label">About Me page</div>
+        <h2 id="bio-heading">Biography</h2>
+
+        <p class="bio-text">
+          I have spent most of my professional journey in the financial sector, starting as a banker
+          before moving into my current role as an <span class="highlight">Auditor at the Central Bank of Malaysia</span>.
+          My work focuses on governance, compliance, and risk assessment ensuring that work processes & procedures run with
+          precision and integrity. Alongside this, I continue to grow as a <span class="highlight">student</span>,
+          constantly learning and adapting to new frameworks, regulations, and technology.
+        </p>
+
+        <p class="bio-text">
+          Outside of the office, music plays an important part in my life. As a <span class="highlight">guitarist</span>
+          and Malay traditional band member of ARMADA DENDANG MALAYSIA, I balance structure and discipline
+          with creativity and culture. This blend of <span class="highlight">numbers and notes</span> shapes how I see the world:
+          analytical yet expressive, formal yet deeply human.
+        </p>
+
+        <h2 style="margin-top:1.2rem;">Personal Interests</h2>
+        <ul class="interests-list">
+          <li>Exploring traditional Malay music and cultural heritage through live performances.</li>
+          <li>Studying in SARJANA MUDA SAINS MAKLUMAT (KEPUJIAN) PENGURUSAN SISTEM MAKLUMAT at UiTM Shah Alam.</li>
+          <li>Recording and arranging guitar pieces that mix modern and traditional elements.</li>
+          <li>Attending and experiencing a spiritual suluk at PULAU MANIS, TERENGGANU.</li>
+        </ul>
+
+        <!-- Auto-Scrolling Photo Section -->
+        <h2 style="margin-top:1.4rem;">Photo Highlights</h2>
+        <div class="photo-scroll">
+          <div class="scroll-track">
+            <img src="3.jpg" alt="Photo 3">
+            <img src="20.jpg" alt="Photo 20">
+            <img src="21.jpg" alt="Photo 21">
+            <img src="24.jpg" alt="Photo 24">
+            <img src="25.jpg" alt="Photo 25">
+
+            <!-- Duplicate for smooth infinite loop -->
+            <img src="3.jpg" alt="Photo 3">
+            <img src="20.jpg" alt="Photo 20">
+            <img src="21.jpg" alt="Photo 21">
+            <img src="24.jpg" alt="Photo 24">
+            <img src="25.jpg" alt="Photo 25">
+
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: Feedback form + resources -->
+      <section class="card" aria-labelledby="feedback-heading">
+        <div class="badge-label">Interactive element</div>
+        <h2 id="feedback-heading">Feedback Form</h2>
+
+        <p class="bio-text">
+          If you are part of a music band, event, or organisation and would like to collaborate,
+          share feedback, or invite ARMADA DENDANG MALAYSIA, or wanna try experiencing a Suluk, feel free to use the form below.
+        </p>
+
+        <form action="https://formspree.io/f/mjgboage" method="post" style="margin-top:.8rem;">
+          <div class="form-group">
+            <label for="music-band" class="form-label">
+              Music Band
+              <span class="helper">(e.g. Kem Rohani Al Malik, school band, cultural group)</span>
+            </label>
+            <input
+              type="text"
+              id="music-band"
+              name="music-band"
+              class="input"
+              placeholder="Enter your band or event name" />
+            <div class="resource-links" style="margin-top:.25rem;">
+              <a href="https://wa.me/60148489421" target="_blank">WhatsApp Me</a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" id="email" name="email" class="input" placeholder="name@example.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" name="message" class="textarea"
+              placeholder="Share collaboration ideas, feedback, or event details here."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span class="icon">✉️</span> Submit
+          </button>
+        </form>
+
+        <h2 style="margin-top:1.3rem;">My Music Journey</h2>
+        <p class="bio-text">
+          Music has always been a core part of my life. As a guitarist and a member of
+          <span class="highlight">ARMADA DENDANG MALAYSIA</span>, I actively perform traditional Malay music and
+          explore cultural sounds that connect modern expression with heritage.
+        </p>
+        <p class="bio-text">
+          Whether it’s live performances, rehearsals, or arranging new pieces, music gives me balance
+          and creativity beyond my professional work. It keeps me grounded, inspired, and connected
+          to the community.
+        </p>
+
+        <div class="resource-links">
+          <span style="font-size:.8rem; color:var(--muted);">Related links:</span>
+          <a href="https://www.youtube.com/@armadadendangmalaysia3692" target="_blank">
+            https://www.youtube.com/@armadadendangmalaysia3692
+          </a>
+          <a href="https://armadadendang.org.my/" target="_blank">
+            https://armadadendang.org.my/
+          </a>
+          <a href="https://www.facebook.com/zawiyahpm/?locale=ms_MY" target="_blank">
+            https://www.facebook.com/zawiyahpm/?locale=ms_MY
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <strong>Contact:</strong> mohdyusni.mohdmusa@yahoo.com &nbsp;|&nbsp;
+        <strong>Copyright:</strong> © 2022–2025 unless stated otherwise under specific headings.
+      </p>
+      <p>
+        Source and references may include official documents, cultural archives, and personal experience.
+        Last update: 22.12.2025. Contact the site administrator for more info.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById('bg-music');
+    function playMusic() { bgMusic.play(); }
+    function pauseMusic() { bgMusic.pause(); }
+    function stopMusic() { bgMusic.pause(); bgMusic.currentTime = 0; }
+
+    // Auto-stop when any video plays, resume after end
+    document.addEventListener('play', function(e) {
+      if (e.target.tagName === 'VIDEO') { bgMusic.pause(); }
+    }, true);
+
+    document.addEventListener('ended', function(e) {
+      if (e.target.tagName === 'VIDEO') { bgMusic.play(); }
+    }, true);
+  </script>
+</body>
+</html>
